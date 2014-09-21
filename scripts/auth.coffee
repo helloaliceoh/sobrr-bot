@@ -6,7 +6,7 @@
 #   None
 #
 # Configuration:
-#   HUBOT_AUTH_ADMIN - A comma separate list of user IDs
+#   SOBRRBOT_AUTH_ADMIN - A comma separate list of user IDs
 #
 # Commands:
 #   hubot <user> has <role> role - Assigns a role to a user
@@ -30,11 +30,11 @@
 
 module.exports = (robot) ->
 
-  unless process.env.HUBOT_AUTH_ADMIN?
-    robot.logger.warning 'The HUBOT_AUTH_ADMIN environment variable not set'
+  unless process.env.SOBRRBOT_AUTH_ADMIN?
+    robot.logger.warning 'The SOBRRBOT_AUTH_ADMIN environment variable not set'
 
-  if process.env.HUBOT_AUTH_ADMIN?
-    admins = process.env.HUBOT_AUTH_ADMIN.split ','
+  if process.env.SOBRRBOT_AUTH_ADMIN?
+    admins = process.env.SOBRRBOT_AUTH_ADMIN.split ','
   else
     admins = []
 
@@ -62,7 +62,7 @@ module.exports = (robot) ->
         msg.reply "#{name} already has the '#{newRole}' role."
       else
         if newRole is 'admin'
-          msg.reply "Sorry, the 'admin' role can only be defined in the HUBOT_AUTH_ADMIN env variable."
+          msg.reply "Sorry, the 'admin' role can only be defined in the SOBRRBOT_AUTH_ADMIN env variable."
         else
           myRoles = msg.message.user.roles or []
           if msg.message.user.id.toString() in admins
@@ -79,7 +79,7 @@ module.exports = (robot) ->
       user.roles or= []
 
       if newRole is 'admin'
-        msg.reply "Sorry, the 'admin' role can only be removed from the HUBOT_AUTH_ADMIN env variable."
+        msg.reply "Sorry, the 'admin' role can only be removed from the SOBRRBOT_AUTH_ADMIN env variable."
       else
         myRoles = msg.message.user.roles or []
         if msg.message.user.id.toString() in admins
