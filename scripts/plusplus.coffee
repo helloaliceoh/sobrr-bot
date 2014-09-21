@@ -191,11 +191,3 @@ module.exports = (robot) ->
     mention_name = msg.match[3].trim()
     console.log("name: #{name}, mention_name: #{mention_name}.")
     scoreKeeper.setMentionName name, mention_name
-
-  robot.respond /clearboard/i, (msg) ->
-    message = []
-    scoreKeeper.cache.scores={}
-    score.Keeper.cache.scoreLog={}
-    msg.send "Scoreboard has been cleared."
-
-
