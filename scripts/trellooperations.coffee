@@ -22,7 +22,7 @@
 #   carmstrong
 
 module.exports = (robot) ->
-  robot.respond /trello marketing (.*)/i, (msg) ->
+  robot.respond /trello operations (.*)/i, (msg) ->
     cardName = msg.match[1]
     if not cardName.length
       msg.send "You must give the card a name"
