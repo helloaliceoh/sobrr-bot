@@ -10,7 +10,7 @@
 #   SOBRRBOT_TRELLOIDEA_LIST - The list ID that you'd like to create cards for
 #
 # Commands:
-#   hubot trello idea card <name> - Create a new Trello card in BDD (Blueprint Driven Development Board)
+#   hubot trello marketing card <name> - Create a new Trello card in Marketing board, Other Tasks list
 #
 # Notes:
 #   To get your key, go to: https://trello.com/1/appKey/generate
@@ -22,7 +22,7 @@
 #   carmstrong
 
 module.exports = (robot) ->
-  robot.respond /trello idea (.*)/i, (msg) ->
+  robot.respond /trello marketing (.*)/i, (msg) ->
     cardName = msg.match[1]
     if not cardName.length
       msg.send "You must give the card a name"

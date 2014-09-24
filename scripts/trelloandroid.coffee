@@ -1,0 +1,48 @@
+# Description:
+#   Create new cards in Trello
+#
+# Dependencies:
+#   "node-trello": "latest"
+#
+# Configuration:
+#   SOBRRBOT_TRELLO_ANDROID_IDEA_KEY - Trello application key
+#   SOBRRBOT_TRELLO_ANDROID_IDEA_TOKEN - Trello API token
+#   SOBRRBOT_TRELLO_ANDROID_IDEA_LIST - The list ID that you'd like to create cards for
+#
+# Commands:
+#   hubot trello android card <name> - Create a new Trello card in Android board, Bugs list
+#
+# Notes:
+#   To get your key, go to: https://trello.com/1/appKey/generate
+#   To get your token, go to: https://trello.com/1/authorize?key=<<your key>>&name=Hubot+Trello&expiration=never&response_type=token&scope=read,write
+#   Figure out what board you want to use, grab it's id from the url (https://trello.com/board/<<board name>>/<<board id>>)
+#   To get your list ID, go to: https://trello.com/1/boards/<<board id>>/lists?key=<<your key>>&token=<<your token>>  "id" elements are the list ids.
+#
+# Author:
+#   carmstrong
+
+module.exports = (robot) ->
+  robot.respond /trello android (.*)/i, (msg) ->
+    cardName = msg.match[1]
+    if not cardName.length
+      msg.send "You must give the card a name"
+      return
+    if not process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_KEY
+      msg.send "Error: Trello app key is not specified"
+    if not process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_TOKEN
+      msg.send "Error: Trello token is not specified"
+    if not process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_LIST
+      msg.send "Error: Trello list ID is not specified"
+    if not (process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_KEY and process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_TOKEN and process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_LIST)
+      msg.send "ERROR1"
+      return
+    createCard msg, cardName
+
+createCard = (msg, cardName) ->
+  Trello = require("node-trello")
+  t = new Trello(process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_KEY, process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_TOKEN)
+  t.post "/1/cards", {name: cardName, idList: process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_LIST}, (err, data) ->
+    if err
+      msg.send "There was an error creating the card"
+      return
+    msg.send data.url
