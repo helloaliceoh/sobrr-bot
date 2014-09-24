@@ -5,8 +5,8 @@
 #   "node-trello": "latest"
 #
 # Configuration:
-#   SOBRRBOT_TRELLO_ANDROID_IDEA_KEY - Trello application key
-#   SOBRRBOT_TRELLO_ANDROID_IDEA_TOKEN - Trello API token
+#   SOBRRBOT_TRELLOIDEA_KEY - Trello application key
+#   SOBRRBOT_TRELLOIDEA_TOKEN - Trello API token
 #   SOBRRBOT_TRELLO_ANDROID_IDEA_LIST - The list ID that you'd like to create cards for
 #
 # Commands:
@@ -27,20 +27,20 @@ module.exports = (robot) ->
     if not cardName.length
       msg.send "You must give the card a name"
       return
-    if not process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_KEY
+    if not process.env.SOBRRBOT_TRELLOIDEA_KEY
       msg.send "Error: Trello app key is not specified"
-    if not process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_TOKEN
+    if not process.env.SOBRRBOT_TRELLOIDEA_TOKEN
       msg.send "Error: Trello token is not specified"
     if not process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_LIST
       msg.send "Error: Trello list ID is not specified"
-    if not (process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_KEY and process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_TOKEN and process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_LIST)
+    if not (process.env.SOBRRBOT_TRELLOIDEA_KEY and process.env.SOBRRBOT_TRELLOIDEA_TOKEN and process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_LIST)
       msg.send "ERROR1"
       return
     createCard msg, cardName
 
 createCard = (msg, cardName) ->
   Trello = require("node-trello")
-  t = new Trello(process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_KEY, process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_TOKEN)
+  t = new Trello(process.env.SOBRRBOT_TRELLOIDEA_KEY, process.env.SOBRRBOT_TRELLOIDEA_TOKEN)
   t.post "/1/cards", {name: cardName, idList: process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_LIST}, (err, data) ->
     if err
       msg.send "There was an error creating the card"
