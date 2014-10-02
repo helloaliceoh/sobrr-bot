@@ -9,12 +9,10 @@
 #
 # Commands:
 #   <name>++
-#   <name>--
 #   hubot score <name>
 #   hubot top <amount>
 #   hubot bottom <amount>
 #   hubot scoreboard
-#   hubot clearboard [added by @missonederland]
 #
 # Author:
 #   ajacksified
@@ -73,12 +71,6 @@ class ScoreKeeper
     if @validate(user, from)
       user = @getUser(user)
       @cache.scores[user]++
-      @saveUser(user, from)
-
-  subtract: (user, from) ->
-    if @validate(user, from)
-      user = @getUser(user)
-      @cache.scores[user]--
       @saveUser(user, from)
 
   scoreForUser: (user) ->
