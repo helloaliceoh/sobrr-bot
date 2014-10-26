@@ -1,5 +1,5 @@
 # Description:
-#   Give or take away points. Keeps track and even prints out graphs.
+#   Give points. Keeps track and even prints out graphs.
 #
 # Dependencies:
 #   "underscore": ">= 1.0.0"

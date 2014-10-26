@@ -44,5 +44,3 @@ createCard = (msg, cardName) ->
   t.post "/1/cards", {name: cardName, idList: process.env.SOBRRBOT_TRELLO_ANDROID_IDEA_LIST}, (err, data) ->
     if err
       msg.send "There was an error creating the card"
-      return
-    msg.send data.url
