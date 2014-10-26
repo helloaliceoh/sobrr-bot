@@ -10,7 +10,7 @@
 #   SOBRRBOT_TRELLO_OPERATIONS_IDEA_LIST - The list ID that you'd like to create cards for
 #
 # Commands:
-#   hubot trello marketing card <name> - Create a new Trello card in Operations board, To Do list
+#   hubot trello operations card <name> - Create a new Trello card in Operations board, To Do list
 #
 # Notes:
 #   To get your key, go to: https://trello.com/1/appKey/generate
